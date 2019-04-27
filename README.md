@@ -30,4 +30,4 @@
  </ul>
  
 <h5>Diagrama de montagem</h5>
- <img href="https://1drv.ms/u/s!AuZ0KLc1CFJMguc93tpq19CuPs-_eg">
+ <img src="https://1drv.ms/u/s!AuZ0KLc1CFJMguc93tpq19CuPs-_eg">
