@@ -17,7 +17,7 @@
    e analise logica possiveis decições de caminhos a serem redirecionadas</p>
 
 
-<h5>Compolentes Usados</h2>
+<h5>Componentes Usados</h2>
  <ul>
   <li>Arduino UNO (1 unidade).</li>
   <li>Sensor Ultranico HC-SR04 (3 unidade).</li>
