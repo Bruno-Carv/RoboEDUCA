@@ -1,9 +1,9 @@
 # RoboEDUCA
- <h1><a href="">ESAMC Santos</a> - Engenharia da computação 6 semestre</h1>
+ <h1><a href="">ESAMC Santos</a> - Engenharia da computação - 6 Semestre</h1>
  <h2>Projeto Robotico Educacional - Trabalho de Sistema Embarcados</h2>
  
  
- <ol>Integrantes:
+ <ol><h5>Integrantes</h5><br>
   <li>Bruno Silva Carvalho</li>
   <li>Bruno Da Silva Lara</li>
   <li>Sergio Tadeu</li>
