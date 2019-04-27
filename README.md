@@ -30,4 +30,4 @@
  </ul>
  
 <h5>Diagrama de montagem</h5>
- <img src="https://1drv.ms/u/s!AuZ0KLc1CFJMguc9x6S1C3lzw2Vukw">
+ <img src="https://raw.githubusercontent.com/Bruno-Carv/RoboEDUCA/master/SISTEMA_EMBARCADO_-_Projeto/Sensor.png?token=ALLJHIDZVOZL2NXUBGNKCKS4YSFWG" heigth="700">
