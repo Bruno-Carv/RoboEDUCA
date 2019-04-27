@@ -1,23 +1,20 @@
 # RoboEDUCA
-/**
-* 
-*   <h1>Esamc - Engenharia da computação 6 semestre</h1>
-*   Projeto Robotico Educacional - Trabalho de Sistema Embarcados
-*  
-*  
-*   Integrantes:
-*   Bruno Silva Carvalho
-*   Bruno Da Silva Lara
-*   Sergio Tadeu
-*
-*
-*   Objetivo do Projeto:
-* 
-*   Com intuito de estimular e interesar dos jovens na área de robotica e computacional 
-*   o robo desenvolvido tem como funcionalidade, controle de entradas e saidas digitais 
-*   e analogicas. Com (3) sensores ultrasonicos para verificar obstaculos em seu caminho, 
-*   e analise logica possiveis decições de caminhos a serem redirecionadas
-*   
-*/
+ <h1><a href="">ESAMC Santos</a> - Engenharia da computação 6 semestre</h1>
+ <h2>Projeto Robotico Educacional - Trabalho de Sistema Embarcados</h2>
+ 
+ 
+ <ol>Integrantes:
+  <li>Bruno Silva Carvalho</li>
+  <li>Bruno Da Silva Lara</li>
+  <li>Sergio Tadeu</li>
+</ol>
+
+   <h3>Objetivo do Projeto</h3>
+ 
+  <p>Com intuito de estimular e interesar dos jovens na área de robotica e computacional 
+   o robo desenvolvido tem como funcionalidade, controle de entradas e saidas digitais 
+   e analogicas. Com (3) sensores ultrasonicos para verificar obstaculos em seu caminho, 
+   e analise logica possiveis decições de caminhos a serem redirecionadas</p>
+
 
 
