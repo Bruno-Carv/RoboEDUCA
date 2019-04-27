@@ -3,7 +3,7 @@
  <h2>Projeto Robotico Educacional - Trabalho de Sistema Embarcados</h2>
  
  
- <ol><h5>Integrantes</h5><br>
+ <ol><h5>Integrantes</h5>
   <li>Bruno Silva Carvalho</li>
   <li>Bruno Da Silva Lara</li>
   <li>Sergio Tadeu</li>
