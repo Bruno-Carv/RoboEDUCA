@@ -26,8 +26,7 @@
 <h5>Bibliotecas</h5>
  <ul>
  <li><a href="https://1drv.ms/u/s!AuZ0KLc1CFJMguc8X0ban7DaQ4AJNA">Ultrasonic</a></li>
- <li></li>
  </ul>
  
 <h5>Diagrama de montagem</h5>
- <img src="https://raw.githubusercontent.com/Bruno-Carv/RoboEDUCA/master/SISTEMA_EMBARCADO_-_Projeto/Sensor.png?token=ALLJHIDZVOZL2NXUBGNKCKS4YSFWG" heigth="700">
+ <img src="https://raw.githubusercontent.com/Bruno-Carv/RoboEDUCA/master/SISTEMA_EMBARCADO_-_Projeto/Sensor.png?token=ALLJHIFNVWEYDDDSYNGI45K4YSIHO" heigth="700">
