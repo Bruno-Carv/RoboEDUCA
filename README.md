@@ -20,8 +20,7 @@
 <h5>Compolentes Usados</h2>
  <ul>
   <li>Arduino UNO (1 unidade).</li>
-  <li>Sensor Ultranico HC-SR04 (3 unidade).</li>
-  <li></li>
+  <li>Sensor Ultranico HC-SR04 (1 unidade).</li>
  </ul>
  
 <h5>Bibliotecas</h5>
