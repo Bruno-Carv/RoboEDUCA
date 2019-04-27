@@ -8,7 +8,7 @@
 *   Bruno Silva Carvalho
 *   Bruno Da Silva Lara
 *   Sergio Tadeu
-*   
+*
 *
 *   Objetivo do Projeto:
 * 
@@ -49,6 +49,25 @@ class Ultrasonico{
       return (Sonar.convert(dados, Ultrasonic::IN));
     }
 };
+/* ------------------------------ Classe dos motor ----------------------------------------------*/
+class Motor{
+  public:
+   int Pino_motor;
+   /*___________________________________ Atributos ______________________________________________*/
+  void Ligar(){
+    digitalWrite(Pino_motor, HIGH);
+  }
+  void Desligar(){
+    digitalWrite(Pino_motor, LOW);
+  }
+};
+
+// Variaveis Globais
+
+float DISTANCIA = 10.00;
+
+
+
 
 /*################################# Código principal do arduino ###################################*/
 void setup() {
@@ -58,10 +77,18 @@ void setup() {
 
 void loop() {
   Ultrasonico sensor1; // Criando uma instancia
+  Motor Led;
+  Led.Pino_motor = 7;
   sensor1.Emitir = 4; // Definindo pino que liga na entrada TRIG
   sensor1.Escutar = 5; // Definindo pino que liga na entrada ECHO
   Serial.print("Distancia em CM: ");
   Serial.print(sensor1.DistanciaCM());
   Serial.print("  Distancia em POL: ");
   Serial.println(sensor1.DistanciaPOL());
+  if(sensor1.DistanciaCM()<DISTANCIA){
+    Led.Ligar();
+  }
+  else{
+    Led.Desligar();
+  }
 }
