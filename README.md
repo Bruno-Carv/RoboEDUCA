@@ -3,9 +3,10 @@
  <h2>Projeto Robotico Educacional - Trabalho de Sistema Embarcados</h2>
  <div>
  <ol><h5>Integrantes</h5>
-  <li><a  style="color:black; text-decoration: none" href="">Bruno Silva Carvalho</a></li>
-  <li><a  style="color:black; text-decoration: none" href="">Bruno Da Silva Lara</a></li>
-  <li><a  style="color:black; text-decoration: none" href="">Sergio Tadeu</a></li>
+  <li><a href="">Bruno Silva Carvalho</a></li>
+  <li><a href="">Bruno Da Silva Lara</a></li>
+  <li><a href="">Sergio Tadeu</a></li>
+  <li><a href="">Kaique</a></li>
 </ol>
 </div>
 
