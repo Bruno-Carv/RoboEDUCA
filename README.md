@@ -23,6 +23,8 @@
   <li>Sensor Ultranico HC-SR04 (3 unidade).</li>
   <li>Led (1 unidades).</li>
   <li>Resistor de 200 Ohm (1 unidades).</li>
+  <li>Módulo I2C (1 unidade).</li>
+  <li>LCD 16x2 (1 unidade).</li>
  </ul>
  
 <h5>Bibliotecas</h5>
@@ -31,4 +33,4 @@
  </ul>
  
 <h5>Diagrama de montagem</h5>
- <img src="https://raw.githubusercontent.com/Bruno-Carv/RoboEDUCA/Vers%C3%A3o(0.1)/SISTEMA_EMBARCADO_-_Projeto/Vers%C3%A3o(0.1).png?token=ALLJHIGS5ECSFLBIEKJUC5K4YSIC6" heigth="700">
+ <img src="" heigth="700">
