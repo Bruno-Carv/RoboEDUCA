@@ -30,6 +30,7 @@
 <h5>Bibliotecas</h5>
  <ul>
  <li><a href="https://1drv.ms/u/s!AuZ0KLc1CFJMguc8X0ban7DaQ4AJNA">Ultrasonic</a></li>
+ <li><a href="https://www.resistorpark.com/content/Arduino_Libraries/wire.zip">Wire</a></li>
  <li><a href="downloads.arduino.cc/libraries/github.com/marcoschwartz/LiquidCrystal_I2C-1.1.2.zip">LiquidCrystal I2C</li>
  </ul>
  
