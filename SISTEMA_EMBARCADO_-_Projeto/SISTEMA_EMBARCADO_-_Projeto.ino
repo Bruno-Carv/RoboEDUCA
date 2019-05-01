@@ -113,11 +113,12 @@ byte Acordado[8] = {
 // Variaveis Globais
 
 float DISTANCIA = 20.00;
-
+float Direita,Esquerda;
 /*################################# Código principal do arduino ###################################*/
 void setup() {
   Serial.begin(9600);// Ativando o Leitor em serial
-  pinMode(7, OUTPUT);// Saida de energia 
+  pinMode(11, OUTPUT);// Saida de energia 
+  pinMode(10, OUTPUT);// Saida de energia 
 
 
   
@@ -146,16 +147,51 @@ void setup() {
 
 void loop() {
   Ultrasonico sensor1; // Criando uma instancia
-  Motor Led;
-  Led.Pino_motor = 7;
   sensor1.Emitir = 4; // Definindo pino que liga na entrada TRIG
   sensor1.Escutar = 5; // Definindo pino que liga na entrada ECHO
-  Serial.print("Distancia em CM: ");// Texto no serial
+  Serial.print("Distancia na Frontal em CM: ");// Texto no serial
   Serial.print(sensor1.DistanciaCM());// Mostrando os dados em centimetros no serial
-  Serial.print("  Distancia em POL: ");// Texto no serial
+  Serial.print("  Distancia  na Frontal em POL: ");// Texto no serial
   Serial.println(sensor1.DistanciaPOL());//Mostrando dados em polegadas no serial
   if(sensor1.DistanciaCM()<DISTANCIA){
-    Led.Desligar();
+    Parar();
+    VendoOsLados();
+    Ultrasonico_Direita();
+    Ultrasonico_Esquerda();
+    OlharPensativo();
+    delay(1000);
+    if(Direita>Esquerda)
+    {
+      VirandoEsquerda();
+    }
+    else if(Direita<Esquerda)
+    {
+      VirandoDireita();
+    }
+  }
+  else{
+    Andando();   
+    Olhando();
+  }
+}
+
+
+void Olhando()
+{
+   lcd.setCursor(3, 0);  //Imprime o olho na posição 3 linha 0 do LCD
+   lcd.write((byte)0);   //Objeto olho
+   lcd.setCursor(12, 0); //Imprime o olho na posição 12 linha 0 do LCD
+   lcd.write((byte)0);   //Objeto olho
+};
+void OlharPensativo()
+{
+   lcd.setCursor(3, 0);  //Imprime o olho na posição 3 linha 0 do LCD
+   lcd.write((byte)1);   //Objeto olho
+   lcd.setCursor(12, 0); //Imprime o olho na posição 12 linha 0 do LCD
+   lcd.write((byte)1);   //Objeto olho
+}
+void VendoOsLados()
+{
     delay(500);
     lcd.setCursor(3, 0); //Imprime o olho na posição 12 linha 0 do LCD
     lcd.write((byte)2);   //Objeto olho
@@ -166,12 +202,64 @@ void loop() {
     lcd.write((byte)3);   //Objeto olho
     lcd.setCursor(12, 0);  //Imprime o olho na posição 3 linha 0 do LCD
     lcd.write((byte)3);   //Objeto olho
-  }
-  else{
-   Led.Ligar();
-   lcd.setCursor(3, 0);  //Imprime o olho na posição 3 linha 0 do LCD
-   lcd.write((byte)0);   //Objeto olho
-   lcd.setCursor(12, 0); //Imprime o olho na posição 12 linha 0 do LCD
-   lcd.write((byte)0);   //Objeto olho
-  }
+}
+void Andando()
+{
+  Motor Motor_esquerdo;
+  Motor_esquerdo.Pino_motor = 10;
+  Motor Motor_direito;
+  Motor_direito.Pino_motor = 11;
+  Motor_esquerdo.Ligar();
+  Motor_direito.Ligar();
+}
+void Parar()
+{
+  Motor Motor_esquerdo;
+  Motor_esquerdo.Pino_motor = 10;
+  Motor Motor_direito;
+  Motor_direito.Pino_motor = 11;
+  Motor_esquerdo.Desligar();
+  Motor_direito.Desligar();
+}
+void VirandoEsquerda()
+{
+  Motor Motor_esquerdo;
+  Motor_esquerdo.Pino_motor = 10;
+  Motor Motor_direito;
+  Motor_direito.Pino_motor = 11;
+  Motor_esquerdo.Ligar();
+  Motor_direito.Desligar();
+  delay(2000);
+}
+void VirandoDireita()
+{
+  Motor Motor_esquerdo;
+  Motor_esquerdo.Pino_motor = 10;
+  Motor Motor_direito;
+  Motor_direito.Pino_motor = 11;
+  Motor_esquerdo.Desligar();
+  Motor_direito.Ligar();
+  delay(2000);
+}
+void Ultrasonico_Esquerda()
+{
+  Ultrasonico sensor2; // Criando uma instancia
+  sensor2.Emitir = 2; // Definindo pino que liga na entrada TRIG
+  sensor2.Escutar = 3; // Definindo pino que liga na entrada ECHO
+  Esquerda = sensor2.DistanciaCM();  
+  Serial.print("Distancia na Esquerda em CM: ");// Texto no serial
+  Serial.print(sensor2.DistanciaCM());// Mostrando os dados em centimetros no serial
+  Serial.print("  Distancia  na Esquerda em POL: ");// Texto no serial
+  Serial.println(sensor2.DistanciaPOL());//Mostrando dados em polegadas no serial
+}
+void Ultrasonico_Direita()
+{
+  Ultrasonico sensor3; // Criando uma instancia
+  sensor3.Emitir = 8; // Definindo pino que liga na entrada TRIG
+  sensor3.Escutar = 9; // Definindo pino que liga na entrada ECHO
+  Direita = sensor3.DistanciaCM();
+  Serial.print("Distancia na Direita em CM: ");// Texto no serial
+  Serial.print(sensor3.DistanciaCM());// Mostrando os dados em centimetros no serial
+  Serial.print("  Distancia  na Direita em POL: ");// Texto no serial
+  Serial.println(sensor3.DistanciaPOL());//Mostrando dados em polegadas no serial
 }
