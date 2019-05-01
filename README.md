@@ -22,8 +22,8 @@
  <ul>
   <li>Arduino UNO (1 unidade).</li>
   <li>Sensor Ultranico HC-SR04 (3 unidade).</li>
-  <li>Led (1 unidades).</li>
-  <li>Resistor de 200 Ohm (1 unidades).</li>
+  <li>Led (2 unidades).</li>
+  <li>Resistor de 200 Ohm (2 unidades).</li>
   <li>Módulo I2C (1 unidade).</li>
   <li>LCD 16x2 (1 unidade).</li>
  </ul>
