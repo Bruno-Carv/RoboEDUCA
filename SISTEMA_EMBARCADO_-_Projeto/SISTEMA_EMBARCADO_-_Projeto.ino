@@ -1,265 +1,287 @@
 /**
-* 
-*   Esamc - Engenharia da computação 6 semestre 
-*   Projeto Robotico Educacional - Trabalho de Sistema Embarcados
-*  
-*  
-*   Integrantes:
-*   Bruno Silva Carvalho
-*   Bruno Da Silva Lara
-*   Sergio Tadeu
-*   Kaique 
-*
-*
-*   Objetivo do Projeto:
-* 
-*   Com intuito de estimular e interesar dos jovens na área de robotica e computacional 
-*   o robo desenvolvido tem como funcionalidade, controle de entradas e saidas digitais 
-*   e analogicas. Com (3) sensores ultrasonicos para verificar obstaculos em seu caminho, 
-*   e analise logica possiveis decições de caminhos a serem redirecionadas
-*   
-*/
-
-//Biblioteca
-#include<Ultrasonic.h>// Biblioteca do sensor Ultrasonico
+ * @package Robo educacional autonomo
+ * 
+ *   Esamc - Engenharia da computação 6 semestre 
+ *   Projeto Robotico Educacional - Trabalho de Sistema Embarcados
+ *  
+ *  
+ *   Integrantes:
+ *   Bruno Silva Carvalho
+ *   Bruno Da Silva Lara
+ *   Sergio Tadeu
+ *   Kaique 
+ *
+ *
+ *   Objetivo do Projeto:
+ * 
+ *   Com intuito de estimular e interesar dos jovens na área de robotica e computacional 
+ *   o robo desenvolvido tem como funcionalidade, controle de entradas e saidas digitais 
+ *   e analogicas. Com (3) sensores ultrasonicos para verificar obstaculos em seu caminho, 
+ *   e analise logica possiveis decições de caminhos a serem redirecionadas
+ *   
+ */
+ 
+//Bibliotecas
+#include <Ultrasonic.h>// Biblioteca do sensor Ultrasonico
 #include <Wire.h> // Biblioteca do Módulo I2C
 #include <LiquidCrystal_I2C.h>// Bilioteca do LCD
 
-/*############################# Classes #########################################################*/
-
-/* ------------------------------ Classe dos sensor ultrasonic ----------------------------------*/
-class Ultrasonico{
+// Classes 
+class Ultrasonico {
   
+  //Atributos de definição dos pinos usados
+  private:    
+    int Tring; // Emitir(trig)
+    int Echo; // Escutar (echo) 
+
+  //Metodos
   public:
+    void pinoSensor(int Emitir, int Escutar)
+    {
+      Tring = Emitir;
+      Echo = Escutar;
+    }
+    
+    float Centimetro(){
+      Ultrasonic Sonar(Tring, Echo);//Acionando o sensor do pino emitir e escutar
+      return (Sonar.convert(Sonar.timing(), Ultrasonic::CM));
+    }
+    
+    float Polegadas(){
+      Ultrasonic Sonar(Tring, Echo);// Acionando o sensor com os pinos emitir e escutar
+      return (Sonar.convert(Sonar.timing(), Ultrasonic::IN));
+    }
+};
+class Motor {
   
-    /*___________________________________ Atributos ______________________________________________*/
-    
-    long Emitir; // Emitir(trig)
-    long Escutar; // Escutar (echo) 
-    
-    /*___________________________________ Metodos ________________________________________________*/
-    
-    // metodo de medir em centimetros
-    long DistanciaCM(){
-      Ultrasonic Sonar(Emitir, Escutar);//Acionando o sensor do pino emitir e escutar
-      long dados = Sonar.timing();// Coleta dos dados do sensor
-      return (Sonar.convert(dados, Ultrasonic::CM));
-    }
-    // metodo de medir em polegadas
-    long DistanciaPOL(){
-      Ultrasonic Sonar(Emitir, Escutar);// Acionando o sensor com os pinos emitir e escutar
-      long dados = Sonar.timing();// Coleta dos dados do sensor
-      return (Sonar.convert(dados, Ultrasonic::IN));
-    }
+    // Atributos de definição do pinos usados
+    private:
+        int IN1;
+        int IN2;
+        int IN3;
+        int IN4;
+
+    //Metódos
+    public:
+        // Metódos usado para inicializar os pinos para o Driver Ponte H L298N
+        void PinMotor(int motorA1,int motorA2,int motorB1,int motorB2)
+        {
+          IN1 = motorA1;
+          IN2 = motorA2;
+          IN3 = motorB1;
+          IN4 = motorB2;
+        }
+        void inicializarMotores()
+        {
+            //Definindo os pinos como saida
+            pinMode(IN1, OUTPUT);
+            pinMode(IN2, OUTPUT);
+            pinMode(IN3, OUTPUT);
+            pinMode(IN4, OUTPUT);
+        }
+
+        /**
+         * Metódos utilizados para controler dos motores 
+         */
+        void FrenteAmbos()
+        {
+            digitalWrite(IN1, HIGH);
+            digitalWrite(IN2, LOW);
+            digitalWrite(IN3, HIGH);
+            digitalWrite(IN4, LOW);
+            delay(2000);
+        }
+        void ParaTrasAmbos()
+        {
+            digitalWrite(IN1, HIGH);
+            digitalWrite(IN2, HIGH);
+            digitalWrite(IN3, HIGH);
+            digitalWrite(IN4, HIGH);
+            delay(2000);
+        }
+        void PararAmbos()
+        {
+            digitalWrite(IN1, HIGH);
+            digitalWrite(IN2, HIGH);
+            digitalWrite(IN3, HIGH);
+            digitalWrite(IN4, HIGH);
+            delay(500);
+        }
+        //Movimentos do motor A
+        void MotorA_Frente()
+        {
+            digitalWrite(IN1, HIGH);
+            digitalWrite(IN2, LOW);
+            delay(2000);
+        }
+        void MotorA_Parar()
+        {
+            digitalWrite(IN1, HIGH);
+            digitalWrite(IN2, HIGH);
+            delay(500);
+        }
+        void MotorA_ParaTras()
+        {
+            digitalWrite(IN1, LOW);
+            digitalWrite(IN2, HIGH);
+            delay(2000);
+        }
+
+        //Movimentos do motor B
+        void MotorB_Frente()
+        {
+            digitalWrite(IN3, HIGH);
+            digitalWrite(IN4, LOW);
+            delay(2000);
+        }
+        void MotorB_Parar()
+        {
+            digitalWrite(IN3, HIGH);
+            digitalWrite(IN4, HIGH);
+            delay(500);
+        }
+        void MotorB_ParaTras()
+        {
+            digitalWrite(IN3, LOW);
+            digitalWrite(IN4, HIGH);
+            delay(2000);
+        }
 };
-/* ------------------------------ Classe dos motor ----------------------------------------------*/
-class Motor{
-  public:
-   int Pino_motor;
-   /*___________________________________ Atributos ______________________________________________*/
-  void Ligar(){
-    digitalWrite(Pino_motor, HIGH);
-  }
-  void Desligar(){
-    digitalWrite(Pino_motor, LOW);
-  }
+LiquidCrystal_I2C rosto(0x27,2,1,0,4,5,6,7,3, POSITIVE);
+class lcd
+{
+    //atributos
+    private:
+        byte Olhando_esquerda[8] = {B01110,B10011,B10111,B10111,B10111,B10111,B10011,B01110};
+        byte Olhando_direita[8] = {B01110,B11001,B11101,B11101,B11101,B11101,B11001,B01110};
+        byte BOCA[8] = {B00000,B00000,B00000,B00000,B11111,B11111,B00000,B00000};
+        byte Acordado[8] = {B01110,B11001,B11101,B11111,B11111,B11111,B11111,B01110};
+    //Metodos
+    public:
+        void inicializando()
+        {
+            rosto.begin(16,2);
+            rosto.createChar(0, Acordado);// Definindo numero do byte
+            rosto.createChar(1, BOCA);
+            rosto.createChar(2, Olhando_esquerda);
+            rosto.createChar(3, Olhando_direita);
+            rosto.clear();  //Limpa o LCD
+        }
+        void Boca()
+        {
+            rosto.setCursor(5, 1); //Imprime parte da boca na posição 5 linha 1 do LCD
+            rosto.write((byte)1);  //Objeto boca
+            rosto.setCursor(6, 1); //Imprime parte da boca na posição 6 linha 1 do LCD
+            rosto.write((byte)1);  //Objeto boca
+            rosto.setCursor(7, 1); //Imprime parte da boca na posição 7 linha 1 do LCD
+            rosto.write((byte)1);   //Objeto boca
+            rosto.setCursor(8, 1); //Imprime parte da boca na posição 8 linha 1 do LCD
+            rosto.write((byte)1);   //Objeto boca
+            rosto.setCursor(9, 1);  //Imprime parte da boca na posição 9 linha 1 do LCD
+            rosto.write((byte)1);   //Objeto boca
+            rosto.setCursor(10, 1);  //Imprime parte da boca na posição 10 linha 1 do LCD
+            rosto.write((byte)1);   //Objeto boca
+        }
+        void Olhar_Pensativo()
+        {
+            rosto.setCursor(3, 0);  //Imprime o olho na posição 3 linha 0 do LCD
+            rosto.write((byte)1);   //Objeto olho
+            rosto.setCursor(12, 0); //Imprime o olho na posição 12 linha 0 do LCD
+            rosto.write((byte)1);   //Objeto olho
+        }
+        void Olhando_Esquerda()
+        {
+            rosto.setCursor(3, 0); //Imprime o olho na posição 12 linha 0 do LCD
+            rosto.write((byte)2);   //Objeto olho
+            rosto.setCursor(12, 0);  //Imprime o olho na posição 3 linha 0 do LCD
+            rosto.write((byte)2);   //Objeto olho
+        }
+        void Olhando_Direita()
+        {
+            rosto.setCursor(3, 0); //Imprime o olho na posição 12 linha 0 do LCD
+            rosto.write((byte)3);   //Objeto olho
+            rosto.setCursor(12, 0);  //Imprime o olho na posição 3 linha 0 do LCD
+            rosto.write((byte)3);   //Objeto olho
+        }
+        void VendoOsLados()
+        {
+            delay(500);
+            rosto.setCursor(3, 0); //Imprime o olho na posição 12 linha 0 do LCD
+            rosto.write((byte)2);   //Objeto olho
+            rosto.setCursor(12, 0);  //Imprime o olho na posição 3 linha 0 do LCD
+            rosto.write((byte)2);   //Objeto olho
+            delay(1000);
+            rosto.setCursor(3, 0); //Imprime o olho na posição 12 linha 0 do LCD
+            rosto.write((byte)3);   //Objeto olho
+            rosto.setCursor(12, 0);  //Imprime o olho na posição 3 linha 0 do LCD
+            rosto.write((byte)3);   //Objeto olho
+        }
+        void Vendo()
+        {
+            rosto.setCursor(3, 0);  //Imprime o olho na posição 3 linha 0 do LCD
+            rosto.write((byte)0);   //Objeto olho
+            rosto.setCursor(12, 0); //Imprime o olho na posição 12 linha 0 do LCD
+            rosto.write((byte)0);   //Objeto olho
+        }
 };
 
-// Inicializa o display no endereco 0x27
-LiquidCrystal_I2C lcd(0x27,2,1,0,4,5,6,7,3, POSITIVE);
-byte Olhando_esquerda[8] = {
-  B01110,
-  B10011,
-  B10111,
-  B10111,
-  B10111,
-  B10111,
-  B10011,
-  B01110
-};
-byte Olhando_direita[8] = {
-  B01110,
-  B11001,
-  B11101,
-  B11101,
-  B11101,
-  B11101,
-  B11001,
-  B01110
-};
-byte Boca[8] = {
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B11111,
-  B11111,
-  B00000,
-  B00000
-};
+//Referenciando Classes
 
-byte Acordado[8] = {
-  B01110,
-  B11001,
-  B11101,
-  B11111,
-  B11111,
-  B11111,
-  B11111,
-  B01110
-};
+  Ultrasonico sensorFrontal;
+  Ultrasonico sensorEsquerdo; 
+  Ultrasonico sensorDireito;
+  Motor partida;
+  lcd expressao;
 
+// Variavel Global
+float ObstaculoDis = 2.50;
 
-// Variaveis Globais
-
-float DISTANCIA = 20.00;
-float Direita,Esquerda;
-/*################################# Código principal do arduino ###################################*/
+//Codigo Principal
 void setup() {
-  Serial.begin(9600);// Ativando o Leitor em serial
-  pinMode(11, OUTPUT);// Saida de energia 
-  pinMode(10, OUTPUT);// Saida de energia 
-
-
-  
-  lcd.begin (16,2);
-  
-  lcd.createChar(0, Acordado);// Definindo numero do byte
-  lcd.createChar (1, Boca);
-  lcd.createChar(2, Olhando_esquerda);
-  lcd.createChar(3, Olhando_direita);
-  lcd.clear();  //Limpa o LCD
-
-  
-  lcd.setCursor(5, 1); //Imprime parte da boca na posição 5 linha 1 do LCD
-  lcd.write((byte)1);  //Objeto boca
-  lcd.setCursor(6, 1); //Imprime parte da boca na posição 6 linha 1 do LCD
-  lcd.write((byte)1);  //Objeto boca
-  lcd.setCursor(7, 1); //Imprime parte da boca na posição 7 linha 1 do LCD
-  lcd.write((byte)1);   //Objeto boca
-  lcd.setCursor(8, 1); //Imprime parte da boca na posição 8 linha 1 do LCD
-  lcd.write((byte)1);   //Objeto boca
-  lcd.setCursor(9, 1);  //Imprime parte da boca na posição 9 linha 1 do LCD
-  lcd.write((byte)1);   //Objeto boca
-  lcd.setCursor(10, 1);  //Imprime parte da boca na posição 10 linha 1 do LCD
-  lcd.write((byte)1);   //Objeto boca
+    Serial.begin(9600);
+    sensorFrontal.pinoSensor(6,5);
+    //sensorDireito.pinoSensor();
+    //sensorEsquerdo.pinoSensor();
+    partida.inicializarMotores();
+    expressao.inicializando();
+    expressao.Boca(); 
 }
 
-void loop() {
-  Ultrasonico sensor1; // Criando uma instancia
-  sensor1.Emitir = 4; // Definindo pino que liga na entrada TRIG
-  sensor1.Escutar = 5; // Definindo pino que liga na entrada ECHO
-  Serial.print("Distancia na Frontal em CM: ");// Texto no serial
-  Serial.print(sensor1.DistanciaCM());// Mostrando os dados em centimetros no serial
-  Serial.print("  Distancia  na Frontal em POL: ");// Texto no serial
-  Serial.println(sensor1.DistanciaPOL());//Mostrando dados em polegadas no serial
-  if(sensor1.DistanciaCM()<DISTANCIA){
-    Parar();
-    VendoOsLados();
-    Ultrasonico_Direita();
-    Ultrasonico_Esquerda();
-    OlharPensativo();
-    delay(1000);
-    if(Direita>Esquerda)
+void loop() { 
+  Serial.println(sensorFrontal.Centimetro());
+  if(sensorFrontal.Centimetro() > ObstaculoDis)
+  {
+    expressao.Vendo();
+    partida.FrenteAmbos();
+  }
+  else 
+  {
+    partida.PararAmbos();
+    expressao.VendoOsLados();
+    if(sensorDireito.Centimetro() == sensorEsquerdo.Centimetro())
     {
-      VirandoEsquerda();
+        partida.ParaTrasAmbos();
+        if(sensorDireito.Centimetro() == sensorEsquerdo.Centimetro())
+        {
+            partida.MotorA_Frente();
+            partida.MotorB_ParaTras();
+        }
+        else if(sensorDireito.Centimetro()>sensorEsquerdo.Centimetro())
+        {
+
+        }
+        else
+        {
+
+        }
     }
-    else if(Direita<Esquerda)
+    else if ( sensorDireito.Centimetro()>sensorEsquerdo.Centimetro() )
     {
-      VirandoDireita();
+
+    }
+    else
+    {
+
     }
   }
-  else{
-    Andando();   
-    Olhando();
-  }
-}
-
-
-void Olhando()
-{
-   lcd.setCursor(3, 0);  //Imprime o olho na posição 3 linha 0 do LCD
-   lcd.write((byte)0);   //Objeto olho
-   lcd.setCursor(12, 0); //Imprime o olho na posição 12 linha 0 do LCD
-   lcd.write((byte)0);   //Objeto olho
-};
-void OlharPensativo()
-{
-   lcd.setCursor(3, 0);  //Imprime o olho na posição 3 linha 0 do LCD
-   lcd.write((byte)1);   //Objeto olho
-   lcd.setCursor(12, 0); //Imprime o olho na posição 12 linha 0 do LCD
-   lcd.write((byte)1);   //Objeto olho
-}
-void VendoOsLados()
-{
-    delay(500);
-    lcd.setCursor(3, 0); //Imprime o olho na posição 12 linha 0 do LCD
-    lcd.write((byte)2);   //Objeto olho
-    lcd.setCursor(12, 0);  //Imprime o olho na posição 3 linha 0 do LCD
-    lcd.write((byte)2);   //Objeto olho
-    delay(1000);
-    lcd.setCursor(3, 0); //Imprime o olho na posição 12 linha 0 do LCD
-    lcd.write((byte)3);   //Objeto olho
-    lcd.setCursor(12, 0);  //Imprime o olho na posição 3 linha 0 do LCD
-    lcd.write((byte)3);   //Objeto olho
-}
-void Andando()
-{
-  Motor Motor_esquerdo;
-  Motor_esquerdo.Pino_motor = 10;
-  Motor Motor_direito;
-  Motor_direito.Pino_motor = 11;
-  Motor_esquerdo.Ligar();
-  Motor_direito.Ligar();
-}
-void Parar()
-{
-  Motor Motor_esquerdo;
-  Motor_esquerdo.Pino_motor = 10;
-  Motor Motor_direito;
-  Motor_direito.Pino_motor = 11;
-  Motor_esquerdo.Desligar();
-  Motor_direito.Desligar();
-}
-void VirandoEsquerda()
-{
-  Motor Motor_esquerdo;
-  Motor_esquerdo.Pino_motor = 10;
-  Motor Motor_direito;
-  Motor_direito.Pino_motor = 11;
-  Motor_esquerdo.Ligar();
-  Motor_direito.Desligar();
-  delay(2000);
-}
-void VirandoDireita()
-{
-  Motor Motor_esquerdo;
-  Motor_esquerdo.Pino_motor = 10;
-  Motor Motor_direito;
-  Motor_direito.Pino_motor = 11;
-  Motor_esquerdo.Desligar();
-  Motor_direito.Ligar();
-  delay(2000);
-}
-void Ultrasonico_Esquerda()
-{
-  Ultrasonico sensor2; // Criando uma instancia
-  sensor2.Emitir = 2; // Definindo pino que liga na entrada TRIG
-  sensor2.Escutar = 3; // Definindo pino que liga na entrada ECHO
-  Esquerda = sensor2.DistanciaCM();  
-  Serial.print("Distancia na Esquerda em CM: ");// Texto no serial
-  Serial.print(sensor2.DistanciaCM());// Mostrando os dados em centimetros no serial
-  Serial.print("  Distancia  na Esquerda em POL: ");// Texto no serial
-  Serial.println(sensor2.DistanciaPOL());//Mostrando dados em polegadas no serial
-}
-void Ultrasonico_Direita()
-{
-  Ultrasonico sensor3; // Criando uma instancia
-  sensor3.Emitir = 8; // Definindo pino que liga na entrada TRIG
-  sensor3.Escutar = 9; // Definindo pino que liga na entrada ECHO
-  Direita = sensor3.DistanciaCM();
-  Serial.print("Distancia na Direita em CM: ");// Texto no serial
-  Serial.print(sensor3.DistanciaCM());// Mostrando os dados em centimetros no serial
-  Serial.print("  Distancia  na Direita em POL: ");// Texto no serial
-  Serial.println(sensor3.DistanciaPOL());//Mostrando dados em polegadas no serial
 }
