@@ -54,7 +54,12 @@ class Ultrasonico {
 };
 
 class Motor {
-  
+    /***
+     * Classe do motor sendo definido 
+     * 
+     * Motor A - Direita
+     * Motor B - Esquerda
+     */ 
     // Atributos de definição do pinos usados
     private:
         int IN1;
@@ -285,22 +290,30 @@ void loop() {
         {
             //Virar para a direita (90 graus)
             expressao.Olhando_Direita();
+            partida.MotorA_Frente();//Motor da esquerda horario
+            partida.MotorB_ParaTras();//Motor da direita anti-horario
         }
         else
         {
             //Virar para a esquerda (-90 graus)
             expressao.Olhando_Esquerda();
+            partida.MotorB_Frente();//Motor da direita horario
+            partida.MotorA_ParaTras();//Motor da esquerda anti-horario
         }
     }
     else if ( sensorEsquerdo.Centimetro()>sensorDireito.Centimetro() )
     {
         //Virar para a esquerda ( - 90 graus)
         expressao.Olhando_Esquerda();
+        partida.MotorB_Frente();//Motor da direita horario
+        partida.MotorA_ParaTras();//Motor da esquerda anti-horario
     }
     else
     {
         //Virar para a direita (90 graus) 
         expressao.Olhando_Direita();
+        partida.MotorA_Frente();//Motor da esquerda horario
+        partida.MotorB_ParaTras();//Motor da direita anti-horario
     }
   }
 }
