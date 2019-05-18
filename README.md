@@ -26,6 +26,7 @@
   <li>Módulo Ponte H L298N (1 unidade).</li>
   <li>Módulo I2C (1 unidade).</li>
   <li>LCD 16x2 (1 unidade).</li>
+  <li>Entrada de bateria (1 unidade) obs: esse componente varia de acordo com o motor dc irá ser utilizado.</li>
  </ul>
  
 <h5>Bibliotecas</h5>
