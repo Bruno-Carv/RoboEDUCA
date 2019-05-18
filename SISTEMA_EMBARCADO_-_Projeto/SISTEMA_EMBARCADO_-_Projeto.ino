@@ -52,6 +52,7 @@ class Ultrasonico {
       return (Sonar.convert(Sonar.timing(), Ultrasonic::IN));
     }
 };
+
 class Motor {
   
     // Atributos de definição do pinos usados
@@ -147,9 +148,10 @@ class Motor {
             delay(2000);
         }
 };
+
 LiquidCrystal_I2C rosto(0x27,2,1,0,4,5,6,7,3, POSITIVE);
-class lcd
-{
+class lcd{
+
     //atributos
     private:
         byte Olhando_esquerda[8] = {B01110,B10011,B10111,B10111,B10111,B10111,B10011,B01110};
@@ -225,7 +227,7 @@ class lcd
         }
 };
 
-//Referenciando Classes
+//Referênciando Classes
 
   Ultrasonico sensorFrontal;
   Ultrasonico sensorEsquerdo; 
@@ -234,54 +236,71 @@ class lcd
   lcd expressao;
 
 // Variavel Global
-float ObstaculoDis = 2.50;
+
+float ObstaculoDis = 2.50;//Variavel distancia limite
 
 //Codigo Principal
 void setup() {
-    Serial.begin(9600);
-    sensorFrontal.pinoSensor(6,5);
-    //sensorDireito.pinoSensor();
-    //sensorEsquerdo.pinoSensor();
+
+    Serial.begin(9600);//Iniciando a leitura serial
+    
+    sensorFrontal.pinoSensor(4,5);//Sensor Fronta denifindo os pinos (tring,echo)
+    sensorDireito.pinoSensor(6,7);//Sensor Esquerdo denifindo os pinos(tring,echo)
+    sensorEsquerdo.pinoSensor(3,2);//Sensor Direito denifindo os pinos (tring,echo)
+    
+    partida.PinMotor(8,9,10,11);//Definindo Pinos do modulo ligado no motor
     partida.inicializarMotores();
-    expressao.inicializando();
-    expressao.Boca(); 
+    
+    expressao.inicializando();//Ligando o lcd
+    expressao.Boca();//Desenhando a boca
+
 }
 
 void loop() { 
-  Serial.println(sensorFrontal.Centimetro());
+
+  Serial.println(sensorFrontal.Centimetro());//Leitura da distancia
   if(sensorFrontal.Centimetro() > ObstaculoDis)
   {
-    expressao.Vendo();
-    partida.FrenteAmbos();
+    expressao.Vendo();//Rosto no lcd
+    partida.FrenteAmbos();//Indo para a Frente
   }
   else 
   {
-    partida.PararAmbos();
-    expressao.VendoOsLados();
+    partida.PararAmbos();//Parar motor
+    expressao.VendoOsLados();//Rosto para olhar para os lados
+    expressao.Olhar_Pensativo();//Expressao de pensativo
     if(sensorDireito.Centimetro() == sensorEsquerdo.Centimetro())
     {
-        partida.ParaTrasAmbos();
+        partida.ParaTrasAmbos();//Andando para trás
+        expressao.Olhar_Pensativo();//Expressao de pensativo
         if(sensorDireito.Centimetro() == sensorEsquerdo.Centimetro())
         {
+            //Girar 180 graus
+            expressao.VendoOsLados();//Rosto para olhar para os lados
             partida.MotorA_Frente();
             partida.MotorB_ParaTras();
+            delay(2000);
         }
         else if(sensorDireito.Centimetro()>sensorEsquerdo.Centimetro())
         {
-
+            //Virar para a direita (90 graus)
+            expressao.Olhando_Direita();
         }
         else
         {
-
+            //Virar para a esquerda (-90 graus)
+            expressao.Olhando_Esquerda();
         }
     }
-    else if ( sensorDireito.Centimetro()>sensorEsquerdo.Centimetro() )
+    else if ( sensorEsquerdo.Centimetro()>sensorDireito.Centimetro() )
     {
-
+        //Virar para a esquerda ( - 90 graus)
+        expressao.Olhando_Esquerda();
     }
     else
     {
-
+        //Virar para a direita (90 graus) 
+        expressao.Olhando_Direita();
     }
   }
 }
