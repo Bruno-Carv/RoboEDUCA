@@ -247,7 +247,7 @@ float ObstaculoDis = 10.20;//Variavel distancia limite
 //Codigo Principal
 void setup() {
 
-    Serial.begin(9600);//Iniciando a leitura serial
+    //Serial.begin(9600);//Iniciando a leitura serial
     
     sensorFrontal.pinoSensor(4,5);//Sensor Fronta denifindo os pinos (tring,echo)
     sensorDireito.pinoSensor(6,7);//Sensor Esquerdo denifindo os pinos(tring,echo)
