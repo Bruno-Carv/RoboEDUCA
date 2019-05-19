@@ -274,9 +274,11 @@ void loop() {
   {
     Serial.println("Parando");
     partida.PararAmbos();//Parar motor
+    Serial.println("Vendos os lados");
     expressao.VendoOsLados();//Rosto para olhar para os lados
+    Serial.println("Pensando");
     expressao.Olhar_Pensativo();//Expressao de pensativo
-    
+    delay(500);
     Serial.print("Direita = ");
     Serial.println(sensorDireito.Centimetro());
     Serial.print("Esquerda = ");
@@ -296,7 +298,7 @@ void loop() {
             partida.MotorB_ParaTras();
             //delay(2000);
         }
-        else if(sensorDireito.Centimetro()>sensorEsquerdo.Centimetro())
+        else if(sensorDireito.Centimetro() > sensorEsquerdo.Centimetro())
         {
             Serial.println("Virando para DIREITA");
             //Virar para a direita (90 graus)
@@ -313,7 +315,7 @@ void loop() {
             partida.MotorA_ParaTras();//Motor da esquerda anti-horario
         }
     }
-    else if ( sensorEsquerdo.Centimetro()>sensorDireito.Centimetro() )
+    else if ( sensorEsquerdo.Centimetro() > sensorDireito.Centimetro() )
     {
         Serial.println("Virando para ESQUERDA");
         //Virar para a esquerda ( - 90 graus)
