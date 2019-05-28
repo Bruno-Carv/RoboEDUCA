@@ -95,7 +95,7 @@ class Motor {
             digitalWrite(IN2, LOW);
             digitalWrite(IN3, HIGH);
             digitalWrite(IN4, LOW);
-            delay(2000);
+            delay(100);
         }
         void ParaTrasAmbos()
         {
@@ -103,7 +103,7 @@ class Motor {
             digitalWrite(IN2, HIGH);
             digitalWrite(IN3, HIGH);
             digitalWrite(IN4, HIGH);
-            delay(2000);
+            delay(500);
         }
         void PararAmbos()
         {
@@ -118,19 +118,19 @@ class Motor {
         {
             digitalWrite(IN1, HIGH);
             digitalWrite(IN2, LOW);
-            delay(2000);
+            delay(100);
         }
         void MotorA_Parar()
         {
             digitalWrite(IN1, HIGH);
             digitalWrite(IN2, HIGH);
-            delay(500);
+            delay(100);
         }
         void MotorA_ParaTras()
         {
             digitalWrite(IN1, LOW);
             digitalWrite(IN2, HIGH);
-            delay(2000);
+            delay(100);
         }
 
         //Movimentos do motor B
@@ -138,19 +138,19 @@ class Motor {
         {
             digitalWrite(IN3, HIGH);
             digitalWrite(IN4, LOW);
-            delay(2000);
+            delay(100);
         }
         void MotorB_Parar()
         {
             digitalWrite(IN3, HIGH);
             digitalWrite(IN4, HIGH);
-            delay(500);
+            delay(100);
         }
         void MotorB_ParaTras()
         {
             digitalWrite(IN3, LOW);
             digitalWrite(IN4, HIGH);
-            delay(2000);
+            delay(100);
         }
 };
 
