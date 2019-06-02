@@ -1,6 +1,6 @@
 /**
- * @package Robo educacional autonomo
- * 
+ *   @package RoboEDUCA (Robo educacional).
+ *  
  *   Esamc - Engenharia da computação 6 semestre 
  *   Projeto Robotico Educacional - Trabalho de Sistema Embarcados
  *  
@@ -8,23 +8,33 @@
  *   Integrantes:
  *   Bruno Silva Carvalho
  *   Bruno Da Silva Lara
+ *   Kaique Leal Santos
  *   Sergio Tadeu
- *   Kaique 
+ *    
  *
  *
  *   Objetivo do Projeto:
  * 
- *   Com intuito de estimular e interesar dos jovens na área de robotica e computacional 
- *   o robo desenvolvido tem como funcionalidade, controle de entradas e saidas digitais 
- *   e analogicas. Com (3) sensores ultrasonicos para verificar obstaculos em seu caminho, 
- *   e analise logica possiveis decições de caminhos a serem redirecionadas
+ *   Com intuito de estimular e interessar dos jovens na área de
+ *   robótica e computacional o robô desenvolvido tem como funcionalidade, 
+ *   controle de entradas e saídas digitais e analógicas. Com (3) sensores 
+ *   ultrassónicos para verificar obstáculos em seu caminho, e analise 
+ *   logica possíveis decisões de caminhos a serem redirecionadas
  *   
  */
  
 //Bibliotecas
-#include <Ultrasonic.h>// Biblioteca do sensor Ultrasonico
-#include <Wire.h> // Biblioteca do Módulo I2C
-#include <LiquidCrystal_I2C.h>// Bilioteca do LCD
+
+// Biblioteca do sensor Ultrassónico
+#include <Ultrasonic.h>
+
+// Biblioteca do Módulo I2C
+#include <Wire.h>
+
+// Biblioteca do LCD
+#include <LiquidCrystal_I2C.h>
+
+
 
 // Classes 
 class Ultrasonico {
@@ -34,7 +44,7 @@ class Ultrasonico {
     int Tring; // Emitir(trig)
     int Echo; // Escutar (echo) 
 
-  //Metodos
+  //Métodos
   public:
     void pinoSensor(int Emitir, int Escutar)
     {
@@ -43,32 +53,41 @@ class Ultrasonico {
     }
     
     float Centimetro(){
-      Ultrasonic Sonar(Tring, Echo);//Acionando o sensor do pino emitir e escutar
+      //Acionando o sensor do pino emitir e escutar
+      Ultrasonic Sonar(Tring, Echo);
       return (Sonar.convert(Sonar.timing(), Ultrasonic::CM));
     }
     
     float Polegadas(){
-      Ultrasonic Sonar(Tring, Echo);// Acionando o sensor com os pinos emitir e escutar
+      // Acionando o sensor com os pinos emitir e escutar
+      Ultrasonic Sonar(Tring, Echo);
       return (Sonar.convert(Sonar.timing(), Ultrasonic::IN));
     }
 };
 
-class Motor {
+
     /***
      * Classe do motor sendo definido 
      * 
      * Motor A - Direita
      * Motor B - Esquerda
      */ 
-    // Atributos de definição do pinos usados
+
+class Motor {
+
+
+    // Atributos de definição dos pinos usados
     private:
         int IN1;
         int IN2;
         int IN3;
         int IN4;
 
+
+
     //Metódos
     public:
+
         // Metódos usado para inicializar os pinos para o Driver Ponte H L298N
         void PinMotor(int motorA1,int motorA2,int motorB1,int motorB2)
         {
@@ -86,8 +105,9 @@ class Motor {
             pinMode(IN4, OUTPUT);
         }
 
+
         /**
-         * Metódos utilizados para controler dos motores 
+         * Métodos utilizados para controle dos motores 
          */
         void FrenteAmbos()
         {
@@ -95,7 +115,6 @@ class Motor {
             digitalWrite(IN2, LOW);
             digitalWrite(IN3, HIGH);
             digitalWrite(IN4, LOW);
-            delay(2000);
         }
         void ParaTrasAmbos()
         {
@@ -103,7 +122,6 @@ class Motor {
             digitalWrite(IN2, HIGH);
             digitalWrite(IN3, HIGH);
             digitalWrite(IN4, HIGH);
-            delay(2000);
         }
         void PararAmbos()
         {
@@ -111,46 +129,42 @@ class Motor {
             digitalWrite(IN2, HIGH);
             digitalWrite(IN3, HIGH);
             digitalWrite(IN4, HIGH);
-            delay(500);
         }
+
+
         //Movimentos do motor A
         void MotorA_Frente()
         {
             digitalWrite(IN1, HIGH);
             digitalWrite(IN2, LOW);
-            delay(2000);
         }
         void MotorA_Parar()
         {
             digitalWrite(IN1, HIGH);
             digitalWrite(IN2, HIGH);
-            delay(500);
         }
         void MotorA_ParaTras()
         {
             digitalWrite(IN1, LOW);
             digitalWrite(IN2, HIGH);
-            delay(2000);
         }
+
 
         //Movimentos do motor B
         void MotorB_Frente()
         {
             digitalWrite(IN3, HIGH);
             digitalWrite(IN4, LOW);
-            delay(2000);
         }
         void MotorB_Parar()
         {
             digitalWrite(IN3, HIGH);
             digitalWrite(IN4, HIGH);
-            delay(500);
         }
         void MotorB_ParaTras()
         {
             digitalWrite(IN3, LOW);
             digitalWrite(IN4, HIGH);
-            delay(2000);
         }
 };
 
@@ -159,76 +173,127 @@ class lcd{
 
     //atributos
     private:
-        byte Olhando_esquerda[8] = {B01110,B10011,B10111,B10111,B10111,B10111,B10011,B01110};
-        byte Olhando_direita[8] = {B01110,B11001,B11101,B11101,B11101,B11101,B11001,B01110};
-        byte BOCA[8] = {B00000,B00000,B00000,B00000,B11111,B11111,B00000,B00000};
-        byte Acordado[8] = {B01110,B11001,B11101,B11111,B11111,B11111,B11111,B01110};
+        byte Olhando_esquerda[8] = 
+        { 
+          B01110,
+          B10011,
+          B10111,
+          B10111,
+          B10111,
+          B10111,
+          B10011,
+          B01110
+        };
+        byte Olhando_direita[8] = 
+        {
+          B01110,
+          B11001,
+          B11101,
+          B11101,
+          B11101,
+          B11101,
+          B11001,
+          B01110
+        };
+        byte BOCA[8] = 
+        {
+          B00000,
+          B00000,
+          B00000,
+          B00000,
+          B11111,
+          B11111,
+          B00000,
+          B00000
+        };
+        byte Acordado[8] = 
+        {
+          B01110,
+          B11001,
+          B11101,
+          B11111,
+          B11111,
+          B11111,
+          B11111,
+          B01110
+        };
+        
     //Metodos
     public:
         void inicializando()
         {
+            // Iniciando o LCD
             rosto.begin(16,2);
-            rosto.createChar(0, Acordado);// Definindo numero do byte
+            // Definindo numero do byte
+            rosto.createChar(0, Acordado);
             rosto.createChar(1, BOCA);
             rosto.createChar(2, Olhando_esquerda);
             rosto.createChar(3, Olhando_direita);
-            rosto.clear();  //Limpa o LCD
+            //Limpa o LCD
+            rosto.clear();  
         }
         void Boca()
         {
-            rosto.setCursor(5, 1); //Imprime parte da boca na posição 5 linha 1 do LCD
-            rosto.write((byte)1);  //Objeto boca
-            rosto.setCursor(6, 1); //Imprime parte da boca na posição 6 linha 1 do LCD
-            rosto.write((byte)1);  //Objeto boca
-            rosto.setCursor(7, 1); //Imprime parte da boca na posição 7 linha 1 do LCD
-            rosto.write((byte)1);   //Objeto boca
-            rosto.setCursor(8, 1); //Imprime parte da boca na posição 8 linha 1 do LCD
-            rosto.write((byte)1);   //Objeto boca
-            rosto.setCursor(9, 1);  //Imprime parte da boca na posição 9 linha 1 do LCD
-            rosto.write((byte)1);   //Objeto boca
-            rosto.setCursor(10, 1);  //Imprime parte da boca na posição 10 linha 1 do LCD
-            rosto.write((byte)1);   //Objeto boca
+            //Imprime parte da boca nas posições do (5 ao 10) linha 1 do LCD
+            rosto.setCursor(5, 1);
+            rosto.write((byte)1);
+            rosto.setCursor(6, 1); 
+            rosto.write((byte)1);
+            rosto.setCursor(7, 1);
+            rosto.write((byte)1);
+            rosto.setCursor(8, 1);
+            rosto.write((byte)1);
+            rosto.setCursor(9, 1);
+            rosto.write((byte)1);
+            rosto.setCursor(10, 1);
+            rosto.write((byte)1);
         }
         void Olhar_Pensativo()
         {
-            rosto.setCursor(3, 0);  //Imprime o olho na posição 3 linha 0 do LCD
-            rosto.write((byte)1);   //Objeto olho
-            rosto.setCursor(12, 0); //Imprime o olho na posição 12 linha 0 do LCD
-            rosto.write((byte)1);   //Objeto olho
+            //Imprime o olho na posição 3 e 12 linha 0 do LCD
+            rosto.setCursor(3, 0);  
+            rosto.write((byte)1);
+            rosto.setCursor(12, 0);
+            rosto.write((byte)1);
         }
         void Olhando_Esquerda()
         {
-            rosto.setCursor(3, 0); //Imprime o olho na posição 12 linha 0 do LCD
-            rosto.write((byte)2);   //Objeto olho
-            rosto.setCursor(12, 0);  //Imprime o olho na posição 3 linha 0 do LCD
-            rosto.write((byte)2);   //Objeto olho
+            //Imprime o olho na posição 12 linha 0 do LCD
+            rosto.setCursor(3, 0); 
+            rosto.write((byte)2);
+            rosto.setCursor(12, 0);
+            rosto.write((byte)2);
         }
         void Olhando_Direita()
         {
-            rosto.setCursor(3, 0); //Imprime o olho na posição 12 linha 0 do LCD
-            rosto.write((byte)3);   //Objeto olho
-            rosto.setCursor(12, 0);  //Imprime o olho na posição 3 linha 0 do LCD
-            rosto.write((byte)3);   //Objeto olho
+            //Imprime o olho na posição 12 linha 0 do LCD
+            rosto.setCursor(3, 0);
+            rosto.write((byte)3);
+            rosto.setCursor(12, 0);
+            rosto.write((byte)3);
         }
         void VendoOsLados()
         {
             delay(500);
-            rosto.setCursor(3, 0); //Imprime o olho na posição 12 linha 0 do LCD
-            rosto.write((byte)2);   //Objeto olho
-            rosto.setCursor(12, 0);  //Imprime o olho na posição 3 linha 0 do LCD
-            rosto.write((byte)2);   //Objeto olho
+            //Imprime o olho na posição 12 linha 0 do LCD
+            rosto.setCursor(3, 0); 
+            rosto.write((byte)2);   
+            rosto.setCursor(12, 0); 
+            rosto.write((byte)2);   
             delay(1000);
-            rosto.setCursor(3, 0); //Imprime o olho na posição 12 linha 0 do LCD
-            rosto.write((byte)3);   //Objeto olho
-            rosto.setCursor(12, 0);  //Imprime o olho na posição 3 linha 0 do LCD
-            rosto.write((byte)3);   //Objeto olho
+            //Imprime o olho na posição 12 linha 0 do LCD
+            rosto.setCursor(3, 0); 
+            rosto.write((byte)3);
+            rosto.setCursor(12, 0); 
+            rosto.write((byte)3);
         }
         void Vendo()
         {
-            rosto.setCursor(3, 0);  //Imprime o olho na posição 3 linha 0 do LCD
-            rosto.write((byte)0);   //Objeto olho
-            rosto.setCursor(12, 0); //Imprime o olho na posição 12 linha 0 do LCD
-            rosto.write((byte)0);   //Objeto olho
+            //Imprime o olho na posição 3 linhas 0 do LCD
+            rosto.setCursor(3, 0);
+            rosto.write((byte)0);
+            rosto.setCursor(12, 0);
+            rosto.write((byte)0);
         }
 };
 
@@ -242,94 +307,93 @@ class lcd{
 
 // Variavel Global
 
-float ObstaculoDis = 10.20;//Variavel distancia limite
+//Variavel distancia limite
+float ObstaculoDis = 10;
+long direita, esquerda;
 
 //Codigo Principal
 void setup() {
 
-    //Serial.begin(9600);//Iniciando a leitura serial
-    
-    sensorFrontal.pinoSensor(4,5);//Sensor Fronta denifindo os pinos (tring,echo)
-    sensorDireito.pinoSensor(6,7);//Sensor Esquerdo denifindo os pinos(tring,echo)
-    sensorEsquerdo.pinoSensor(3,2);//Sensor Direito denifindo os pinos (tring,echo)
-    
-    partida.PinMotor(8,9,10,11);//Definindo Pinos do modulo ligado no motor
+    //Iniciando a leitura serial
+    Serial.begin(9600);
+
+
+    //Sensor Fronta denifindo os pinos (tring,echo)
+    sensorFrontal.pinoSensor(4,5);
+    //Sensor Esquerdo denifindo os pinos(tring,echo)
+    sensorDireito.pinoSensor(6,7);
+    //Sensor Direito denifindo os pinos (tring,echo)
+    sensorEsquerdo.pinoSensor(3,2);
+
+
+    //Definindo Pinos do modulo ligado no motor
+    partida.PinMotor(8,9,10,11);
+    //Função de inicializar Motores
     partida.inicializarMotores();
     
-    expressao.inicializando();//Ligando o lcd
-    expressao.Boca();//Desenhando a boca
+    //Ligando o lcd
+    expressao.inicializando();
+    //Desenhando a boca
+    expressao.Boca();
 
 }
 
-void loop() { 
-
-  //Serial.println(sensorFrontal.Centimetro());//Leitura da distancia
-  if(sensorFrontal.Centimetro() > ObstaculoDis)
-  {
-    //Serial.println("Andando");
-    expressao.Vendo();//Rosto no lcd
-    partida.FrenteAmbos();//Indo para a Frente
-  }
-  else 
-  {
-    //Serial.println("Parando");
-    partida.PararAmbos();//Parar motor
-    //Serial.println("Vendos os lados");
-    expressao.VendoOsLados();//Rosto para olhar para os lados
-    //Serial.println("Pensando");
-    expressao.Olhar_Pensativo();//Expressao de pensativo
-    delay(500);
-    //Serial.print("Direita = ");
-    //Serial.println(sensorDireito.Centimetro());
-    //Serial.print("Esquerda = ");
-    //Serial.println(sensorEsquerdo.Centimetro());
-    
-    if(sensorDireito.Centimetro() == sensorEsquerdo.Centimetro())
+void loop() 
+{ 
+    if(sensorFrontal.Centimetro()>ObstaculoDis)
     {
-        //Serial.println("Indo para trás");
-        partida.ParaTrasAmbos();//Andando para trás
-        expressao.Olhar_Pensativo();//Expressao de pensativo
-        if(sensorDireito.Centimetro() == sensorEsquerdo.Centimetro())
-        {
-            //Serial.println("Girando");
-            //Girar 180 graus
-            expressao.VendoOsLados();//Rosto para olhar para os lados
-            partida.MotorA_Frente();
-            partida.MotorB_ParaTras();
-            //delay(2000);
-        }
-        else if(sensorDireito.Centimetro() > sensorEsquerdo.Centimetro())
-        {
-            //Serial.println("Virando para DIREITA");
-            //Virar para a direita (90 graus)
-            expressao.Olhando_Direita();
-            partida.MotorA_Frente();//Motor da esquerda horario
-            partida.MotorB_ParaTras();//Motor da direita anti-horario
-        }
-        else
-        {
-            //Serial.println("Virando para ESQUERDA");
-            //Virar para a esquerda (-90 graus)
-            expressao.Olhando_Esquerda();
-            partida.MotorB_Frente();//Motor da direita horario
-            partida.MotorA_ParaTras();//Motor da esquerda anti-horario
-        }
-    }
-    else if ( sensorEsquerdo.Centimetro() > sensorDireito.Centimetro() )
-    {
-        //Serial.println("Virando para ESQUERDA");
-        //Virar para a esquerda ( - 90 graus)
-        expressao.Olhando_Esquerda();
-        partida.MotorB_Frente();//Motor da direita horario
-        partida.MotorA_ParaTras();//Motor da esquerda anti-horario
+        //Rosto olhando para frente
+        expressao.Vendo();
+        //Andar para frente
+        partida.FrenteAmbos();
+        delay(100);
+        //Mostrando os dados
+        Serial.print("Andando :");
+        Serial.println(sensorFrontal.Centimetro());
     }
     else
     {
-        //Serial.println("Virando para DIREITA");
-        //Virar para a direita (90 graus) 
-        expressao.Olhando_Direita();
-        partida.MotorA_Frente();//Motor da esquerda horario
-        partida.MotorB_ParaTras();//Motor da direita anti-horario
+        //Parar
+        partida.PararAmbos();
+        delay(400);
+        //Mostrando os dados abaixo do frontal
+        Serial.print("Parando :");
+        Serial.println(sensorFrontal.Centimetro());
+        //Mostrando os dados da direita
+        direita = sensorDireito.Centimetro();
+        Serial.print("Direita :");
+        Serial.println(sensorDireito.Centimetro());
+        //Mostrando os dados da esquerda
+        esquerda = sensorEsquerdo.Centimetro();
+        Serial.print("Esquerda :");
+        Serial.println(sensorEsquerdo.Centimetro());
+        //Estrutura de decição
+        if(direita > esquerda)
+        {
+            //Virando para direita
+            partida.MotorA_ParaTras();
+            partida.MotorB_Frente();
+            delay(700);
+        }
+        else if( esquerda == direita)
+        {
+            //Para trás
+            partida.ParaTrasAmbos();
+            delay(200);
+            //Virando 180 graus
+            partida.MotorA_Frente();
+            partida.MotorB_ParaTras();
+            delay(350);
+            //Ir para frente
+            partida.FrenteAmbos();
+            delay(100);
+        }
+        else
+        {
+            //Virando para esquerda
+            partida.MotorA_Frente();
+            partida.MotorB_ParaTras();
+            delay(700);
+        }
     }
-  }
 }
