@@ -308,7 +308,7 @@ class lcd{
 // Variavel Global
 
 //Variavel distancia limite
-float ObstaculoDis = 10;
+float ObstaculoDis = 15;
 long direita, esquerda;
 
 //Codigo Principal
@@ -346,7 +346,7 @@ void loop()
         expressao.Vendo();
         //Andar para frente
         partida.FrenteAmbos();
-        delay(100);
+        delay(50);
         //Mostrando os dados
         Serial.print("Andando :");
         Serial.println(sensorFrontal.Centimetro());
@@ -355,37 +355,45 @@ void loop()
     {
         //Parar
         partida.PararAmbos();
+        expressao.Olhar_Pensativo();
         delay(400);
         //Mostrando os dados abaixo do frontal
         Serial.print("Parando :");
         Serial.println(sensorFrontal.Centimetro());
         //Mostrando os dados da direita
+        expressao.Olhando_Direita();
         direita = sensorDireito.Centimetro();
         Serial.print("Direita :");
         Serial.println(sensorDireito.Centimetro());
         //Mostrando os dados da esquerda
+        expressao.Olhando_Esquerda();
         esquerda = sensorEsquerdo.Centimetro();
         Serial.print("Esquerda :");
         Serial.println(sensorEsquerdo.Centimetro());
+        expressao.Olhar_Pensativo();
         //Estrutura de decição
         if(direita > esquerda)
         {
             //Virando para direita
             partida.MotorA_ParaTras();
             partida.MotorB_Frente();
+            expressao.Olhando_Direita();
             delay(700);
         }
         else if( esquerda == direita)
         {
             //Para trás
+            expressao.VendoOsLados();
             partida.ParaTrasAmbos();
             delay(200);
             //Virando 180 graus
             partida.MotorA_Frente();
             partida.MotorB_ParaTras();
+            expressao.Olhando_Esquerda();
             delay(350);
             //Ir para frente
             partida.FrenteAmbos();
+            expressao.Vendo();
             delay(100);
         }
         else
@@ -393,6 +401,7 @@ void loop()
             //Virando para esquerda
             partida.MotorA_Frente();
             partida.MotorB_ParaTras();
+            expressao.Olhando_Esquerda();
             delay(700);
         }
     }
