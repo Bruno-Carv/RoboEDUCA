@@ -37,4 +37,4 @@
  </ul>
  
 <h5>Diagrama de montagem</h5>
- <img src="https://raw.githubusercontent.com/Bruno-Carv/RoboEDUCA/Vers%C3%A3o(1.0)/SISTEMA_EMBARCADO_-_Projeto/Vers%C3%A3o(1.0).png" heigth="700">
+ <img src="https://github.com/Bruno-Carv/RoboEDUCA/blob/Vers%C3%A3o(1.0)/docs/Vers%C3%A3o(1.0).png?raw=true" heigth="700">
