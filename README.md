@@ -2,7 +2,7 @@
 *** Obrigado por estar vendo o meu README. Agora vamos rodar esse projeto incrível :D
 -->
 
-<p align="center"><img src="https://github.com/Bruno-Carv/RoboEDUCA/blob/Vers%C3%A3o(1.0)/docs/logo.png?raw=true" width="400"></p>
+<p align="center"><img src="https://github.com/Bruno-Carv/RoboEDUCA/blob/Vers%C3%A3o(1.0)/docs/logo.png?raw=true"></p>
 
 <h1><a  style="color:black; text-decoration: none" href="https://www.esamc.br/unidade/Santos/">ESAMC Santos</a> - Engenharia da computação - 6 Semestre</h1>
  <h2>Projeto Robotico Educacional - Trabalho de Sistema Embarcados</h2>
