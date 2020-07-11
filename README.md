@@ -1,5 +1,10 @@
-# RoboEDUCA
- <h1><a  style="color:black; text-decoration: none" href="https://www.esamc.br/unidade/Santos/">ESAMC Santos</a> - Engenharia da computação - 6 Semestre</h1>
+<!--
+*** Obrigado por estar vendo o meu README. Agora vamos rodar esse projeto incrível :D
+-->
+
+<p align="center"><img src="" width="400"></p>
+
+<h1><a  style="color:black; text-decoration: none" href="https://www.esamc.br/unidade/Santos/">ESAMC Santos</a> - Engenharia da computação - 6 Semestre</h1>
  <h2>Projeto Robotico Educacional - Trabalho de Sistema Embarcados</h2>
  <div>
  <ol><h5>Integrantes</h5>
