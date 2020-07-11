@@ -1,5 +1,10 @@
-# RoboEDUCA
- <h1><a  style="color:black; text-decoration: none" href="https://www.esamc.br/unidade/Santos/">ESAMC Santos</a> - Engenharia da computação - 6 Semestre</h1>
+<!--
+*** Obrigado por estar vendo o meu README. Agora vamos rodar esse projeto incrível :D
+-->
+
+<p align="center"><img src="" width="400"></p>
+
+<h1><a  style="color:black; text-decoration: none" href="https://www.esamc.br/unidade/Santos/">ESAMC Santos</a> - Engenharia da computação - 6 Semestre</h1>
  <h2>Projeto Robotico Educacional - Trabalho de Sistema Embarcados</h2>
  <div>
  <ol><h5>Integrantes</h5>
@@ -37,4 +42,4 @@
  </ul>
  
 <h5>Diagrama de montagem</h5>
- <img src="https://raw.githubusercontent.com/Bruno-Carv/RoboEDUCA/Vers%C3%A3o(1.0)/SISTEMA_EMBARCADO_-_Projeto/Vers%C3%A3o(1.0).png" heigth="700">
+ <img src="https://github.com/Bruno-Carv/RoboEDUCA/blob/Vers%C3%A3o(1.0)/docs/Vers%C3%A3o(1.0).png?raw=true" heigth="700">
